@@ -1,0 +1,87 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/main"
+    android:layout_width="match_parent"
+    android:background="@drawable/background"
+    android:layout_height="match_parent"
+    tools:context=".ui.main.MainFragment">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/tvScore"
+        android:text="1000"
+        android:textColor="@color/white"
+        android:padding="20dp"
+        android:background="@drawable/bg_text_color"/>
+
+    <FrameLayout
+        android:id="@+id/layout_bar"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerInParent="true"
+        android:background="@drawable/frame">
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_horizontal"
+            android:orientation="horizontal">
+
+            <com.nik.spinslot.imageViewScroll.ImageViewScrolling
+                android:id="@+id/image"
+                android:paddingBottom="20dp"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center_vertical" />
+
+            <com.nik.spinslot.imageViewScroll.ImageViewScrolling
+                android:id="@+id/image2"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center_vertical" />
+
+            <com.nik.spinslot.imageViewScroll.ImageViewScrolling
+                android:id="@+id/image3"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:paddingBottom="20dp"
+                android:layout_marginTop="25dp"
+                android:layout_gravity="center_vertical" />
+
+
+        </LinearLayout>
+    </FrameLayout>
+
+    <ImageView
+        android:id="@+id/up"
+        android:layout_width="62dp"
+        android:layout_height="213dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginStart="2dp"
+        android:layout_marginTop="-6dp"
+        android:layout_marginEnd="52dp"
+        android:layout_marginBottom="115dp"
+        android:layout_toEndOf="@+id/layout_bar"
+        android:src="@drawable/handle" />
+
+    <ImageView
+        android:id="@+id/down"
+        android:layout_width="62dp"
+        android:visibility="gone"
+        android:layout_height="213dp"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentBottom="true"
+        android:layout_marginTop="97dp"
+        android:layout_marginEnd="61dp"
+        android:layout_marginBottom="12dp"
+        android:src="@drawable/handle_down" />
+</RelativeLayout>
