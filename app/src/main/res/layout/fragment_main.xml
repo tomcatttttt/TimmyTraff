@@ -1,87 +1,205 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/main"
     android:layout_width="match_parent"
-    android:background="@drawable/background"
     android:layout_height="match_parent"
+    android:background="@drawable/background"
     tools:context=".ui.main.MainFragment">
 
-    <TextView
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/tvScore"
-        android:text="1000"
-        android:textColor="@color/white"
-        android:padding="20dp"
-        android:background="@drawable/bg_text_color"/>
 
-    <FrameLayout
-        android:id="@+id/layout_bar"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_centerInParent="true"
-        android:background="@drawable/frame">
+    <LinearLayout
+        android:id="@+id/linearLayout"
+        android:layout_width="489dp"
+        android:layout_height="229dp"
+        android:layout_gravity="center_horizontal"
+        android:layout_marginBottom="100dp"
+        android:background="@drawable/frame"
+        android:orientation="horizontal"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.417"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tvTimmy"
+        app:layout_constraintVertical_bias="0.535">
 
-        <LinearLayout
+        <com.nik.spinslot.custom.ImageViewScrolling
+            android:id="@+id/image"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center_horizontal"
-            android:orientation="horizontal">
+            android:layout_gravity="center_vertical"
+            android:layout_marginLeft="70dp"
+            android:layout_marginTop="5dp"
+            android:paddingBottom="20dp" />
 
-            <com.nik.spinslot.imageViewScroll.ImageViewScrolling
-                android:id="@+id/image"
-                android:paddingBottom="20dp"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="25dp"
-                android:layout_gravity="center_vertical" />
+        <com.nik.spinslot.custom.ImageViewScrolling
+            android:id="@+id/image2"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:paddingBottom="20dp" />
 
-            <com.nik.spinslot.imageViewScroll.ImageViewScrolling
-                android:id="@+id/image2"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
-                android:layout_marginTop="25dp"
-                android:layout_gravity="center_vertical" />
-
-            <com.nik.spinslot.imageViewScroll.ImageViewScrolling
-                android:id="@+id/image3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:paddingBottom="20dp"
-                android:layout_marginTop="25dp"
-                android:layout_gravity="center_vertical" />
-
-
-        </LinearLayout>
-    </FrameLayout>
-
-    <ImageView
-        android:id="@+id/up"
-        android:layout_width="62dp"
-        android:layout_height="213dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentEnd="true"
-        android:layout_alignParentBottom="true"
-        android:layout_marginStart="2dp"
-        android:layout_marginTop="-6dp"
-        android:layout_marginEnd="52dp"
-        android:layout_marginBottom="115dp"
-        android:layout_toEndOf="@+id/layout_bar"
-        android:src="@drawable/handle" />
+        <com.nik.spinslot.custom.ImageViewScrolling
+            android:id="@+id/image3"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center_vertical"
+            android:layout_marginTop="5dp"
+            android:layout_marginLeft="20dp"
+            android:paddingBottom="20dp" />
+    </LinearLayout>
 
     <ImageView
         android:id="@+id/down"
-        android:layout_width="62dp"
-        android:visibility="gone"
-        android:layout_height="213dp"
+        android:layout_width="34dp"
+        android:layout_height="42dp"
         android:layout_alignParentTop="true"
         android:layout_alignParentEnd="true"
         android:layout_alignParentBottom="true"
-        android:layout_marginTop="97dp"
-        android:layout_marginEnd="61dp"
-        android:layout_marginBottom="12dp"
-        android:src="@drawable/handle_down" />
-</RelativeLayout>
+        android:src="@drawable/handle_down"
+        android:visibility="gone"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toEndOf="@+id/linearLayout"
+        app:layout_constraintTop_toTopOf="parent" />
+
+
+    <TextView
+        android:id="@+id/tvTimmy"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/fontstyle"
+        android:gravity="center"
+        android:shadowColor="#C6096B"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="10"
+        android:text="Timmy"
+        android:textColor="#F3E805"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.359"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+    <TextView
+        android:id="@+id/tvTraff"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:layout_marginTop="4dp"
+        android:fontFamily="@font/fontstyle"
+        android:shadowColor="#F3E805"
+        android:shadowDx="10"
+        android:shadowDy="10"
+        android:shadowRadius="10"
+        android:text="Traff"
+        android:textColor="#C6096B"
+        android:textSize="64sp"
+        android:textStyle="bold"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.573"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.0" />
+
+
+    <LinearLayout
+        android:layout_width="606dp"
+        android:layout_height="125dp"
+        android:background="@drawable/buttonframe"
+        android:gravity="right"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.128"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
+        app:layout_constraintVertical_bias="0.826" >
+
+        <ImageButton
+            android:id="@+id/btnMinus"
+            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:layout_gravity="center"
+            android:clickable="true"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_arrow_left_24"/>
+        <TextView
+            android:id="@+id/tvBet"
+            android:layout_width="70dp"
+            android:layout_height="wrap_content"
+            android:text="100"
+            android:textStyle="bold"
+            android:fontFamily="@font/fontstyle"
+            android:textSize="40dp"
+            android:gravity="center"
+            android:layout_marginTop="50dp"/>
+        <ImageButton
+            android:id="@+id/btnPlus"
+            android:layout_marginTop="10dp"
+            android:layout_width="50dp"
+            android:layout_height="50dp"
+            android:clickable="true"
+            android:layout_gravity="center"
+            android:background="@android:color/transparent"
+            android:src="@drawable/ic_baseline_arrow_right_24"/>
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="45dp"
+            android:orientation="vertical">
+
+            <TextView
+                android:id="@+id/tvBalance"
+                android:text="BALANCE"
+                android:layout_width="73dp"
+                android:textStyle="bold"
+                android:fontFamily="@font/fontstyle"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center"
+                android:textSize="20sp" />
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tvScore"
+                android:text="1000"
+                android:textStyle="bold"
+                android:fontFamily="@font/fontstyle"
+                android:layout_gravity="center"
+                android:textSize="40dp"/>
+        </LinearLayout>
+
+        <com.nik.spinslot.custom.CustomButton
+            android:id="@+id/buttonSpin"
+            android:layout_width="100dp"
+            android:layout_height="60dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/fontstyle"
+            android:text="@string/spin"
+            android:textAlignment="center"
+            android:textSize="20dp"
+            app:background="@drawable/btngreen" />
+
+        <com.nik.spinslot.custom.CustomButton
+            android:id="@+id/buttonMax"
+            android:layout_width="100dp"
+            android:layout_marginEnd="60dp"
+            android:layout_height="55dp"
+            android:layout_marginTop="30dp"
+            android:fontFamily="@font/fontstyle"
+            android:text="@string/max"
+            android:textSize="20dp"
+            android:textAlignment="center"
+            app:background="@drawable/btngreen" />
+
+    </LinearLayout>
+</androidx.constraintlayout.widget.ConstraintLayout>

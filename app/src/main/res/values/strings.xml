@@ -1,3 +1,5 @@
 <resources>
     <string name="app_name">SpinSlot</string>
+    <string name="spin">\nSPIN!</string>
+    <string name="max">\nMAX!</string>
 </resources>

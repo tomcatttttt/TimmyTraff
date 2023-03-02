@@ -1,22 +1,28 @@
-package com.nik.spinslot.imageViewScroll
+package com.nik.spinslot.custom
 
 import android.animation.Animator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
+import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
 import com.nik.spinslot.R
+import com.nik.spinslot.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.image_view_scrolling.view.*
 
-class ImageViewScrolling : FrameLayout {
+class ImageViewScrolling @JvmOverloads constructor(
+    context: Context,
+    attrs: AttributeSet? = null,
+    defStyleAttr: Int = 0
+) : FrameLayout(context, attrs, defStyleAttr) {
+
+    private lateinit var viewModel: MainViewModel
     internal lateinit var eventEnd: IEventEnd
-
-    internal var last_result = 0
-    internal var oldValue = 0
-
+    var last_result = 0
+    var oldValue = 0
     companion object {
-        private val ANIMATION_DURATION = 150
+        private const val ANIMATION_DURATION = 150
     }
 
     val value: Int
@@ -26,18 +32,9 @@ class ImageViewScrolling : FrameLayout {
         this.eventEnd = eventEnd
     }
 
-    constructor(context: Context) : super(context) {
-        init(context)
-    }
-
-    constructor(context: Context, attrs: AttributeSet) : super(context, attrs) {
-        init(context)
-    }
-
-    private fun init(context: Context) {
+    init {
         LayoutInflater.from(context).inflate(R.layout.image_view_scrolling, this)
-
-        nextImage.translationY = height.toFloat()
+        nextImage.translationY = nextImage.height.toFloat() // измененное значение
     }
 
     fun setValueRandom(image: Int, num_rotate: Int) {
@@ -60,11 +57,13 @@ class ImageViewScrolling : FrameLayout {
                     } else {
                         last_result = 0
                         oldValue = 0
-                        setImage(nextImage, image)
-                        eventEnd.eventEnd(image % 6, num_rotate) //Because we have 6 images
-                    }
-                }
 
+                        setImage(nextImage, image)
+                        eventEnd.eventEnd(image % 6, num_rotate)
+                        //Because we have 6 images
+                    }
+                    nextImage.translationY = nextImage.height.toFloat()
+                }
 
                 override fun onAnimationCancel(animation: Animator) {
                     TODO("Not yet implemented")
@@ -73,27 +72,33 @@ class ImageViewScrolling : FrameLayout {
                 override fun onAnimationRepeat(animation: Animator) {
                     TODO("Not yet implemented")
                 }
-
-
             }).start()
     }
-    private fun setImage(img: ImageView?, value: Int) {
-        if (value == Util.seven)
-            img!!.setImageResource(R.drawable.seven)
-        else if (value == Util.diamond)
+
+
+    enum class Images(val drawableId: Int) {
+        Vinograd(0),
+        DIAMOND(1),
+        CHERRY(2),
+        APPLE(3),
+        LEMON(4),
+        WATERMELON(5)
+    }
+    fun setImage(img: ImageView?, value: Int) {
+        if (value == ImageViewScrolling.Images.Vinograd.drawableId)
+            img!!.setImageResource(R.drawable.vonograd)
+        else if (value == ImageViewScrolling.Images.DIAMOND.drawableId)
             img!!.setImageResource(R.drawable.diamond)
-        else if (value == Util.cherry)
+        else if (value == ImageViewScrolling.Images.CHERRY.drawableId)
             img!!.setImageResource(R.drawable.cherry)
-        else if (value == Util.apple)
+        else if (value == ImageViewScrolling.Images.APPLE.drawableId)
             img!!.setImageResource(R.drawable.apple)
-        else if (value == Util.lemon)
+        else if (value == ImageViewScrolling.Images.LEMON.drawableId)
             img!!.setImageResource(R.drawable.lemon)
-        else if (value == Util.watermelon)
+        else if (value == ImageViewScrolling.Images.WATERMELON.drawableId)
             img!!.setImageResource(R.drawable.watermelon)
 
         img!!.tag = value
         last_result = value
-
     }
-
 }
