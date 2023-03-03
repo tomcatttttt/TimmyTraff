@@ -4,9 +4,9 @@ import android.animation.Animator
 import android.content.Context
 import android.util.AttributeSet
 import android.view.LayoutInflater
-import android.view.View
 import android.widget.FrameLayout
 import android.widget.ImageView
+import com.nik.spinslot.IEventEnd
 import com.nik.spinslot.R
 import com.nik.spinslot.ui.main.MainViewModel
 import kotlinx.android.synthetic.main.image_view_scrolling.view.*
@@ -18,7 +18,6 @@ class ImageViewScrolling @JvmOverloads constructor(
 ) : FrameLayout(context, attrs, defStyleAttr) {
 
     private lateinit var viewModel: MainViewModel
-    internal lateinit var eventEnd: IEventEnd
     var last_result = 0
     var oldValue = 0
     companion object {
@@ -27,9 +26,14 @@ class ImageViewScrolling @JvmOverloads constructor(
 
     val value: Int
         get() = Integer.parseInt(nextImage.tag.toString())
+    internal lateinit var eventEnd: IEventEnd
 
-    fun setEventEnd(eventEnd: IEventEnd) {
-        this.eventEnd = eventEnd
+    fun setEventEnd(eventEnd: (result: Int, count: Int) -> Unit) {
+        this.eventEnd = object : IEventEnd {
+            override fun eventEnd(result: Int, count: Int) {
+                eventEnd(result, count)
+            }
+        }
     }
 
     init {

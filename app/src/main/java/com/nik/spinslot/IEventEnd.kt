@@ -1,4 +1,4 @@
-package com.nik.spinslot.custom
+package com.nik.spinslot
 
 interface IEventEnd {
     fun eventEnd(result: Int, count: Int)
