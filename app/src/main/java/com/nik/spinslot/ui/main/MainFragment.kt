@@ -30,7 +30,8 @@ class MainFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ) = FragmentMainBinding.inflate(inflater, container, false).apply {
-        var currentBalance = viewModel.balance
+        tvBet.text = viewModel.bet.toString()
+        tvScore.text = viewModel.balance.toString()
         image.setEventEnd { result: Int, count: Int ->
             eventEnd(result, count)
         }
@@ -41,19 +42,19 @@ class MainFragment : Fragment() {
             eventEnd(result, count)
         }
 
-        buttonSpin.setBackgroundImage(resources.getDrawable(R.drawable.btngreen))
-        buttonMax.setBackgroundImage(resources.getDrawable(R.drawable.btnpurple))
+        buttonSpin.setBackgroundImage(resources.getDrawable(R.drawable.btnspin))
+        buttonMax.setBackgroundImage(resources.getDrawable(R.drawable.btnmax))
 
         buttonMax.setOnClickListener {
             buttonMax.isEnabled = false
-            viewModel.bet = currentBalance
+            viewModel.bet = viewModel.balance
             tvBet.text = viewModel.bet.toString()
         }
         buttonSpin.setOnClickListener {
             buttonSpin.isEnabled = false
 
-            if (currentBalance >= 10 && currentBalance >= viewModel.bet) {
-                if (currentBalance >= viewModel.bet) {
+            if (viewModel.balance >= 10 && viewModel.balance >= viewModel.bet) {
+                if (viewModel.balance >= viewModel.bet) {
                     buttonSpin.isEnabled = false
 
                     image.setValueRandom(
@@ -69,31 +70,59 @@ class MainFragment : Fragment() {
                         Random.nextInt(15 - 5 + 1) + 5
                     )
 
-                    currentBalance -= viewModel.bet
-                    tvScore.text = currentBalance.toString()
+                    viewModel.balance -= viewModel.bet
+                    tvScore.text = viewModel.balance.toString()
                 } else {
                     Toast.makeText(context, "You lose", Toast.LENGTH_SHORT).show()
                 }
             } else {
                 Toast.makeText(context, "Sorry, you don't have money", Toast.LENGTH_SHORT).show()
             }
+            if (viewModel.balance >= 100){
+                viewModel.bet = 100
+            } else{viewModel.bet = 0}
         }
-
 
 
         btnPlus.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    handler.postDelayed(object : Runnable {
-                        override fun run() {
-                            viewModel.bet = viewModel.incrementCurrentValue(viewModel.bet, currentBalance)
-                            tvBet.text = viewModel.bet.toString()
-                        }
-                    }, 1000)
-                    viewModel.bet = viewModel.incrementCurrentValue(viewModel.bet, currentBalance)
-                    tvBet.text = viewModel.bet.toString()
+                    // When button is pressed, start incrementing the counter by 10 every 100 milliseconds
+                    handler.postDelayed(
+                        @SuppressLint("ClickableViewAccessibility")
+                        object : Runnable {
+                            override fun run() {
+                                val currentValue = viewModel.bet
+                                if (currentValue + 100 <= viewModel.balance) {
+                                    viewModel.bet = currentValue + 100
+                                    tvBet.text = viewModel.bet.toString()
+                                } else {
+                                    viewModel.bet = viewModel.balance
+                                    tvBet.text = viewModel.bet.toString()
+                                    Toast.makeText(
+                                        context,
+                                        "Maximum bet is ${viewModel.balance}.",
+                                        Toast.LENGTH_SHORT
+                                    ).show()
+                                }
+                                handler.postDelayed(this, 100)
+                            }
+                        }, 1000
+                    )
+                    // Increment counter by 1 on button click
+                    if (viewModel.bet + 10 <= viewModel.balance) {
+                        viewModel.bet = viewModel.bet + 10
+                        tvBet.text = viewModel.bet.toString()
+                    } else {
+                        Toast.makeText(
+                            context,
+                            "Maximum bet is ${viewModel.balance}.",
+                            Toast.LENGTH_SHORT
+                        ).show()
+                    }
                 }
                 MotionEvent.ACTION_UP -> {
+                    // When button is released, stop incrementing the counter
                     handler.removeCallbacksAndMessages(null)
                 }
             }
@@ -103,29 +132,41 @@ class MainFragment : Fragment() {
         btnMinus.setOnTouchListener { _, event ->
             when (event.action) {
                 MotionEvent.ACTION_DOWN -> {
-                    // when button is pressed, start decreasing counter by 10 every 100 milliseconds
+                    // When button is pressed, start decrementing the counter by 10 every 100 milliseconds
                     handler.postDelayed(object : Runnable {
                         override fun run() {
                             var currentValue = viewModel.bet
-                            currentValue = viewModel.decrementCurrentValue(currentValue - 100)
-                            viewModel.bet = currentValue
-                            tvBet.text = currentValue.toString()
+                            currentValue -= 100
+                            if (currentValue >= 10) {
+                                viewModel.bet = currentValue
+                                tvBet.text = currentValue.toString()
+                            } else {
+                                viewModel.bet = 10
+                                tvBet.text = viewModel.bet.toString()
+                                Toast.makeText(context, "Minimum bet is 10.", Toast.LENGTH_SHORT)
+                                    .show()
+                            }
                             handler.postDelayed(this, 100)
                         }
                     }, 1000)
-                    // decrement counter by 1 when the button is clicked
+                    // Decrement counter by 1 on button click
                     var currentValue = viewModel.bet
-                    currentValue = viewModel.decrementCurrentValue(currentValue - 10)
-                    viewModel.bet = currentValue
-                    tvBet.text = currentValue.toString()
+                    currentValue -= 10
+                    if (currentValue >= 10) {
+                        viewModel.bet = currentValue
+                        tvBet.text = currentValue.toString()
+                    } else {
+                        Toast.makeText(context, "Minimum bet is 10.", Toast.LENGTH_SHORT).show()
+                    }
                 }
                 MotionEvent.ACTION_UP -> {
-                    // When button is released, stop decrement counter
+                    // When button is released, stop decrementing the counter
                     handler.removeCallbacksAndMessages(null)
                 }
             }
             true
         }
+
 
     }.root
 
@@ -133,8 +174,8 @@ class MainFragment : Fragment() {
         if (count_down < 2)
             count_down++ // If still have image scrolling
         else {
-            buttonSpin.isEnabled = true
-            buttonMax.isEnabled = true
+          buttonSpin.isEnabled = true
+          buttonMax.isEnabled = true
 
             count_down = 0
 
@@ -142,15 +183,16 @@ class MainFragment : Fragment() {
                 Toast.makeText(context, "You won BIG prize", Toast.LENGTH_SHORT).show()
                 viewModel.balance += viewModel.bet * 2
                 tvScore.text = viewModel.balance.toString()
-                tvBet.text = 10.toString()
+                tvBet.text = viewModel.bet.toString()
             } else if (image.value == image2.value || image2.value == image3.value || image.value == image3.value) {
                 Toast.makeText(context, "You won SMALL prize", Toast.LENGTH_SHORT).show()
                 viewModel.balance += viewModel.bet / 2
                 tvScore.text = viewModel.balance.toString()
-                tvBet.text = 10.toString()
+                tvBet.text = viewModel.bet.toString()
             } else {
                 Toast.makeText(context, "You lost", Toast.LENGTH_SHORT).show()
-                tvBet.text = 10.toString()
+                tvBet.text = viewModel.bet.toString()
+                tvScore.text = viewModel.balance.toString()
             }
         }
     }

@@ -9,15 +9,13 @@
     <ImageView
         android:id="@+id/currentImage"
         android:layout_width="105dp"
-        android:layout_height="101dp"
+        android:layout_height="91dp"
         android:layout_gravity="center"
         android:src="@drawable/cherry" />
     <ImageView
         android:id="@+id/nextImage"
         android:layout_width="105dp"
-        android:layout_height="101dp"
+        android:layout_height="91dp"
         android:layout_gravity="center"
         android:src="@drawable/cherry" />
-
-
 </FrameLayout>

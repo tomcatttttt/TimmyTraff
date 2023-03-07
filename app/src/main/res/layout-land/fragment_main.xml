@@ -5,7 +5,7 @@
     android:id="@+id/main"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/middle"
+    android:background="@drawable/background"
     tools:context=".ui.main.MainFragment">
 
 
@@ -16,8 +16,8 @@
         android:layout_marginEnd="8dp"
         android:background="@drawable/buttonframe"
         android:orientation="vertical"
-        app:layout_constraintBottom_toTopOf="@+id/linearLayout"
-        app:layout_constraintEnd_toEndOf="parent">
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
 
         <TextView
             android:id="@+id/tvBalance"
@@ -37,9 +37,9 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
-            android:layout_marginLeft="10dp"
             android:fontFamily="@font/fontstyle"
             android:text="1000"
+            android:layout_marginLeft="10dp"
             android:textColor="@color/white"
             android:textSize="30dp"
             android:textStyle="bold" />
@@ -47,10 +47,10 @@
 
     <LinearLayout
         android:id="@+id/linearLayout"
-        android:layout_width="450dp"
+        android:layout_width="470dp"
         android:layout_height="215dp"
         android:layout_gravity="center_horizontal"
-        android:layout_marginEnd="16dp"
+        android:layout_marginEnd="8dp"
         android:background="@drawable/frame"
         android:gravity="center"
         android:orientation="horizontal"
@@ -157,13 +157,12 @@
     <LinearLayout
         android:id="@+id/linearLayout2"
         android:layout_width="240dp"
-        android:layout_height="95dp"
         android:layout_marginRight="20dp"
+        android:layout_height="95dp"
         android:background="@drawable/buttonframe"
         android:gravity="right"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toStartOf="@+id/buttonSpin"
-        app:layout_constraintStart_toStartOf="parent">
+        app:layout_constraintEnd_toStartOf="@+id/buttonSpin">
 
         <ImageButton
             android:id="@+id/btnMinus"
@@ -207,7 +206,6 @@
         android:layout_height="130dp"
         android:layout_gravity="center_horizontal"
         android:layout_marginEnd="2dp"
-        android:layout_marginBottom="4dp"
         android:background="@drawable/btnspin"
         android:onClick="spinTheWheel"
         android:padding="10dp"
@@ -220,8 +218,10 @@
         android:layout_height="100dp"
         android:layout_gravity="center_horizontal"
 
+        android:layout_marginTop="24dp"
         android:layout_marginEnd="8dp"
-        android:layout_marginBottom="8dp"
+        android:layout_marginBottom="16dp"
         app:layout_constraintBottom_toTopOf="@+id/buttonSpin"
-        app:layout_constraintEnd_toEndOf="parent" />
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/linearLayout3" />
 </androidx.constraintlayout.widget.ConstraintLayout>

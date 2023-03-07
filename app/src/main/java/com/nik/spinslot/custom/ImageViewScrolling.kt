@@ -89,17 +89,17 @@ class ImageViewScrolling @JvmOverloads constructor(
         WATERMELON(5)
     }
     fun setImage(img: ImageView?, value: Int) {
-        if (value == ImageViewScrolling.Images.Vinograd.drawableId)
+        if (value == Images.Vinograd.drawableId)
             img!!.setImageResource(R.drawable.vonograd)
-        else if (value == ImageViewScrolling.Images.DIAMOND.drawableId)
+        else if (value == Images.DIAMOND.drawableId)
             img!!.setImageResource(R.drawable.diamond)
-        else if (value == ImageViewScrolling.Images.CHERRY.drawableId)
+        else if (value == Images.CHERRY.drawableId)
             img!!.setImageResource(R.drawable.cherry)
-        else if (value == ImageViewScrolling.Images.APPLE.drawableId)
+        else if (value == Images.APPLE.drawableId)
             img!!.setImageResource(R.drawable.apple)
-        else if (value == ImageViewScrolling.Images.LEMON.drawableId)
+        else if (value == Images.LEMON.drawableId)
             img!!.setImageResource(R.drawable.lemon)
-        else if (value == ImageViewScrolling.Images.WATERMELON.drawableId)
+        else if (value == Images.WATERMELON.drawableId)
             img!!.setImageResource(R.drawable.watermelon)
 
         img!!.tag = value
